@@ -1,0 +1,8 @@
+.data {
+  font-size: 17px;
+}
+.snack-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

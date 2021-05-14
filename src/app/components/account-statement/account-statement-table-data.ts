@@ -1,0 +1,42 @@
+export const accountStatementTableRows = [
+  {
+    date: '18-01-2020',
+    credit: 170000,
+    debit: 21000,
+    closing: 30000,
+    description: 'Test Description 1',
+    fromto: 'dummy_1',
+  },
+  {
+    date: '11-02-2020',
+    credit: 25749,
+    debit: 11000,
+    closing: 30000,
+    description: 'Test Description 2',
+    fromto: 'dummy_2',
+  },
+  {
+    date: '15-02-2020',
+    credit: 63000,
+    debit: 21000,
+    closing: 100000,
+    description: 'Test Description 3',
+    fromto: 'dummy_10',
+  },
+  {
+    date: '21-03-2020',
+    credit: 145000,
+    debit: 78000,
+    closing: 30000,
+    description: 'Test Description 4',
+    fromto: 'dummy_14',
+  },
+  {
+    date: '16-05-2020',
+    credit: 5000,
+    debit: 21000,
+    closing: 14500,
+    description: 'Test Description 5',
+    fromto: 'dummy_8',
+  },
+];

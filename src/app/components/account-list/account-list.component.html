@@ -1,0 +1,38 @@
+<div class="ht-100">
+  <mat-card class="card-background ht-100vh">
+    <div class="accountslist-actions-css">
+      <div class="mTop-7px">
+        <mat-label class="font-weight-500 page-heading">Account List</mat-label>
+        <hr />
+      </div>
+      <div class="mTop-7px">
+        <button class="marginLt-5px" mat-raised-button (click)="showCreditBalance()">
+          Account Summary
+        </button>
+        <button class="marginLt-5px add-acc-btn" mat-raised-button (click)="onAddAccoutClick()">
+          Add Account
+        </button>
+      </div>
+    </div>
+    <div class="search-box mTop-7px">
+      <div>
+        <button class="marginLt-5px" mat-raised-button color="warn" (click) = "onDownloadPdf('ClientDetails')">
+          <i class="fa fa-download" aria-hidden="true"></i> PDF
+        </button>
+        <button class="marginLt-5px" mat-raised-button color="primary" (click)="onDownLoadExcel('ClientDetails')">
+          <i class="fa fa-download" aria-hidden="true"></i> Excel
+        </button>
+      </div>
+      <mat-form-field class="search-input">
+        <i class="fa fa-search search-icon" aria-hidden="true"></i>
+        <input type="text" matInput placeholder="Search by Client Name" [formControl]="searchTextboxControl"/>
+      </mat-form-field>
+    </div>
+
+    <app-data-table id="accounts-list-table" [rows]="tableRows" [columns]="tableColumns"
+      (actionClicked)="handleActionClick($event)" (rowClicked)="onRowClicked($event)"
+      (pageEvent)="pageEventChange($event)" [totalRecordsCount]="totalRecords">
+    </app-data-table>
+    <mat-spinner *ngIf="loading$ | async" [diameter]="150" class="mat-spinner-position"></mat-spinner>
+  </mat-card>
+</div>

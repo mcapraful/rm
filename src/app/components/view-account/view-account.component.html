@@ -1,0 +1,16 @@
+<div>
+    <mat-card class="card-background account-card mat-elevation-z8">
+        <div class="mTop-7px width-130">
+            <mat-label class="font-weight-500 page-heading">Account List</mat-label>
+            <hr />
+        </div>
+        <h3>{{parentChildHeirarchy}}</h3>
+        <mat-card-content>
+            <app-data-table [rows]="tableRows" [columns]="tableColumns" (actionClicked)="handleActionClick($event)"
+                (rowClicked)="onRowClicked($event)" (pageEvent)="pageEventChange($event)"
+                [totalRecordsCount]="totalRecords">
+            </app-data-table>
+        </mat-card-content>
+        <mat-spinner *ngIf="loading$ | async" class="mat-spinner-position"></mat-spinner>
+    </mat-card>
+</div>

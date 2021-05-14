@@ -1,0 +1,184 @@
+<div>
+    <mat-toolbar class="bet-header-container display-flex-spacebetween">
+        <span>
+            <span class="home-button-wrapper">
+                <button mat-icon-button>
+                    <mat-icon [routerLink]="['/home/user/user-dashboard']" matTooltip="Click here to go home">home
+                    </mat-icon>
+                </button>
+                <span class="d-inline-block">{{matkaBussiness?.name}}</span>
+            </span>
+        </span>
+        <span class="bid-card-header font-size-15px" *ngIf="matkaBussiness">
+            <mat-label class="balance-class">Open Result : {{matkaBussiness?.openTime}}</mat-label>
+            <mat-label class="balance-class margin-top-15px">Close Result: {{matkaBussiness?.closeTime}}</mat-label>
+        </span>
+    </mat-toolbar>
+    <mat-card class="single-digit-card">
+        <mat-toolbar class="header-css">
+            <span>Triple Patti</span>
+        </mat-toolbar>
+        <div class="margin-top-10">
+            <p class="note-font">Note: Bet amount should be greater than or equal to 5!</p>
+        </div>
+        <mat-card-content class="bid-card-actions margin-top-20">
+            <div class="today-date">
+                <p class="margin-left-15 bid-details">
+                    <span> Place Bid for - <b class="bidding-date"> {{this.bidDate}}</b></span>
+                    <span>Available Balance - <b class="bidding-date">₹
+                            {{this.loggedInUserInfo?.availableBalance}}</b></span>
+                    <span>Exposure - <b class="bidding-date">₹ {{this.loggedInUserInfo?.exposer}}</b></span>
+                </p>
+            </div>
+            <div class="content-start-align form-wrapper margin-zero-auto">
+                <form class="wt-100 margin-zero-auto" [formGroup]="triplePattiForm">
+                    <mat-radio-group class="content-space-around-align padding-top-20" formControlName="showType"
+                        aria-label="Select an option">
+                        <mat-radio-button color="primary" value="Open"
+                            [ngClass]="{'cursor-not-allowed': isOpenBidEndTimePassed}"
+                            [disabled]="isOpenBidEndTimePassed">
+                            Open
+                            <span class="d-block radio-helper-text">Biding end at {{openBidEndTime}}</span>
+                        </mat-radio-button>
+                        <mat-radio-button color="primary" value="Close"
+                            [ngClass]="{'cursor-not-allowed': isCloseBidEndTimePassed}"
+                            [disabled]="isCloseBidEndTimePassed">
+                            Close
+                            <span class="d-block radio-helper-text">Biding end at {{closeBidEndTime}}</span>
+                        </mat-radio-button>
+                    </mat-radio-group>
+
+                    <div class="margin-zero-auto padding-left-5">
+                        <div class="field-div">
+                            <span>
+                                <mat-label class="mat-label-font-css">000</mat-label>
+                                <mat-form-field appearance="outline" class="margin-15 form-field-item">
+                                    <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                                    <input matInput type="number" formControlName="0">
+                                    <mat-error *ngIf="triplePattiForm.get('0').invalid">
+                                        Number should be greater than or equal to 5.
+                                    </mat-error>
+                                </mat-form-field>
+                            </span>
+                            <span class="margin-left-20">
+                                <mat-label class="mat-label-font-css">111</mat-label>
+                                <mat-form-field appearance="outline" class="margin-15 form-field-item">
+                                    <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                                    <input matInput type="number" formControlName="111">
+                                    <mat-error *ngIf="triplePattiForm.get('111').invalid">
+                                        Number should be greater than or equal to 5.
+                                    </mat-error>
+                                </mat-form-field>
+                            </span>
+                        </div>
+                        <div class="field-div">
+                            <span>
+                                <mat-label class="mat-label-font-css">222</mat-label>
+                                <mat-form-field appearance="outline" class="margin-15 form-field-item">
+                                    <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                                    <input matInput type="number" formControlName="222">
+                                    <mat-error *ngIf="triplePattiForm.get('222').invalid">
+                                        Number should be greater than or equal to 5.
+                                    </mat-error>
+                                </mat-form-field>
+                            </span>
+                            <span class="margin-left-20">
+                                <mat-label class="mat-label-font-css">333</mat-label>
+                                <mat-form-field appearance="outline" class="margin-15 form-field-item">
+                                    <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                                    <input matInput type="number" formControlName="333">
+                                    <mat-error *ngIf="triplePattiForm.get('333').invalid">
+                                        Number should be greater than or equal to 5.
+                                    </mat-error>
+                                </mat-form-field>
+                            </span>
+                        </div>
+                        <div class="field-div">
+                            <span>
+                                <mat-label class="mat-label-font-css">444</mat-label>
+                                <mat-form-field appearance="outline" class="margin-15 form-field-item">
+                                    <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                                    <input matInput type="number" formControlName="444">
+                                    <mat-error *ngIf="triplePattiForm.get('444').invalid">
+                                        Number should be greater than or equal to 5.
+                                    </mat-error>
+                                </mat-form-field>
+                            </span>
+                            <span class="margin-left-20">
+                                <mat-label class="mat-label-font-css">555</mat-label>
+                                <mat-form-field appearance="outline" class="margin-15 form-field-item">
+                                    <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                                    <input matInput type="number" formControlName="555">
+                                    <mat-error *ngIf="triplePattiForm.get('555').invalid">
+                                        Number should be greater than or equal to 5.
+                                    </mat-error>
+                                </mat-form-field>
+                            </span>
+                        </div>
+                        <div class="field-div">
+                            <span>
+                                <mat-label class="mat-label-font-css">666</mat-label>
+                                <mat-form-field appearance="outline" class="margin-15 form-field-item">
+                                    <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                                    <input matInput type="number" formControlName="666">
+                                    <mat-error *ngIf="triplePattiForm.get('666').invalid">
+                                        Number should be greater than or equal to 5.
+                                    </mat-error>
+                                </mat-form-field>
+                            </span>
+                            <span class="margin-left-20">
+                                <mat-label class="mat-label-font-css">777</mat-label>
+                                <mat-form-field appearance="outline" class="margin-15 form-field-item">
+                                    <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                                    <input matInput type="number" formControlName="777">
+                                    <mat-error *ngIf="triplePattiForm.get('777').invalid">
+                                        Number should be greater than or equal to 5.
+                                    </mat-error>
+                                </mat-form-field>
+                            </span>
+                        </div>
+                        <div class="field-div">
+                            <span>
+                                <mat-label class="mat-label-font-css">888</mat-label>
+                                <mat-form-field appearance="outline" class="margin-15 form-field-item">
+                                    <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                                    <input matInput type="number" formControlName="888">
+                                    <mat-error *ngIf="triplePattiForm.get('888').invalid">
+                                        Number should be greater than or equal to 5.
+                                    </mat-error>
+                                </mat-form-field>
+                            </span>
+                            <span class="margin-left-20">
+                                <mat-label class="mat-label-font-css">999</mat-label>
+                                <mat-form-field appearance="outline" class="margin-15 form-field-item">
+                                    <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                                    <input matInput type="number" formControlName="999">
+                                    <mat-error *ngIf="triplePattiForm.get('999').invalid">
+                                        Number should be greater than or equal to 5.
+                                    </mat-error>
+                                </mat-form-field>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="field-div total-amount-css">
+                        <span>
+                            <mat-label class="mat-label-font-css">Total Amount</mat-label>
+                            <mat-form-field appearance="outline" class="margin-15 form-field-item">
+                                <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                                <input matInput type="number" placeholder="Total" formControlName="total" readonly>
+                            </mat-form-field>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <div class="margin-top-10">
+                <button type="button" mat-raised-button color="primary" [disabled]="!triplePattiForm.valid"
+                    (click)="onPlaceBetClick()">Place Bet</button>
+                <button class="float-right" type="button" mat-raised-button color="primary"
+                    (click)="onResetClick()">Reset</button>
+            </div>
+        </mat-card-content>
+        <mat-spinner *ngIf="loading$ | async" class="mat-spinner-position"></mat-spinner>
+    </mat-card>
+</div>

@@ -1,0 +1,30 @@
+.games-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.image-css {
+  height: 150px;
+  width: 150px;
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+.mat-spinner-position {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+  .image-css {
+    height: 50px;
+    width: 50px;
+    margin-right: 15px;
+    margin-top: 15px;
+  }
+}

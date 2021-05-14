@@ -1,0 +1,87 @@
+<div>
+    <mat-toolbar class="bet-header-container display-flex-spacebetween">
+        <span>
+            <span class="home-button-wrapper">
+                <button mat-icon-button>
+                    <mat-icon [routerLink]="['/home/user/user-dashboard']" matTooltip="Click here to go home">home
+                    </mat-icon>
+                </button>
+                <span class="d-inline-block">{{matkaBussiness?.name}}</span>
+            </span>
+        </span>
+        <span class="bid-card-header font-size-15px" *ngIf="matkaBussiness">
+            <mat-label class="balance-class">Open Result : {{matkaBussiness?.openTime}}</mat-label>
+            <mat-label class="balance-class margin-top-15px">Close Result: {{matkaBussiness?.closeTime}}</mat-label>
+        </span>
+    </mat-toolbar>
+    <mat-card class="dp-motor-digit-card">
+        <mat-toolbar class="header-css">
+            <span>DP Motor</span>
+        </mat-toolbar>
+        <div class="margin-top-10">
+            <p class="note-font">Note: Bet amount should be greater than 5. Enter 4 digit number in ascending order.
+            </p>
+        </div>
+        <mat-card-content class="bid-card-actions margin-top-20">
+            <div class="today-date">
+                <p class="margin-left-15 bid-details">
+                    <span> Place Bid for - <b class="bidding-date"> {{this.bidDate}}</b></span>
+                    <span>Available Balance - <b class="bidding-date">₹
+                            {{this.loggedInUserInfo?.availableBalance}}</b></span>
+                    <span>Exposure - <b class="bidding-date">₹ {{this.loggedInUserInfo?.exposer}}</b></span>
+                </p>
+            </div>
+            <mat-radio-group [(ngModel)]="showType" class="content-space-around-align" aria-label="Select an option">
+                <mat-radio-button color="primary" value="Open"
+                    [ngClass]="{'cursor-not-allowed': isOpenBidEndTimePassed}" [disabled]="isOpenBidEndTimePassed">
+                    Open
+                    <span class="d-block radio-helper-text">Biding end at {{openBidEndTime}}</span>
+                </mat-radio-button>
+                <mat-radio-button color="primary" value="Close"
+                    [ngClass]="{'cursor-not-allowed': isCloseBidEndTimePassed}" [disabled]="isCloseBidEndTimePassed">
+                    Close
+                    <span class="d-block radio-helper-text">Biding end at {{closeBidEndTime}}</span>
+                </mat-radio-button>
+            </mat-radio-group>
+            <div class="margin-top-20">
+                <mat-form-field appearance="outline" class="number-field form-field-motor"
+                    title="Enter 4 Digit Number in Ascending Order">
+                    <mat-label>Enter 4 Digit Number in Ascending Order</mat-label>
+                    <input matInput type="string" [(ngModel)]="number" fixTwoDigitDirective
+                        (ngModelChange)="generatePossibilitiesArray($event)">
+                    <mat-hint align="start" *ngIf="numberValidationError" class="text-red">
+                        <strong>
+                            Please enter a valid 4 Digit Number in Ascending Order
+                        </strong>
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="margin-top-15">
+                <mat-form-field appearance="outline" class="amount-field form-field-motor">
+                    <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                    <mat-label>Enter Amount</mat-label>
+                    <input matInput type="number" [(ngModel)]="amount" fixTwoDigitDirective>
+                </mat-form-field>
+            </div>
+            <div class="margin-top-20 possibility-wrapper">
+                <mat-label class="margin-bottom-15 text-center">Possibilities are :</mat-label>
+                <mat-chip-list class="margin-left-20" *ngIf="possibilitiesArray.length">
+                    <mat-chip *ngFor="let possibility of possibilitiesArray">{{possibility}}</mat-chip>
+                </mat-chip-list>
+            </div>
+            <div class="margin-top-30 text-center">
+                <p class="bold"> Total Amount
+                    <span class="margin-left-20">₹</span>
+                    <span class="margin-left-5">{{12*amount ? 12*amount : '0'}}</span>
+                </p>
+            </div>
+            <div class="margin-top-10">
+                <button type="button" mat-raised-button color="primary"
+                    [disabled]='numberValidationError || (!amount) || !showType' (click)="onPlaceBetClick()">
+                    Place Bet</button>
+                <button class="float-right" type="button" mat-raised-button color="primary"
+                    (click)="onResetClick()">Reset</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

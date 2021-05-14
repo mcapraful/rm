@@ -1,0 +1,41 @@
+<div class="statement-card-wrapper">
+    <div class="accountslist-actions-css">
+        <div class="mTop-7px">
+            <mat-label class="font-weight-500">Current Bets</mat-label>
+        </div>
+        <div class="mTop-7px">
+            <form [formGroup]="currentBetsForm" #formGroupDirective="ngForm">
+                <mat-form-field class="margin-left-25">
+                    <mat-label>From</mat-label>
+                    <input matInput formControlName="fromDate" (click)="fromDate.open()" [matDatepicker]="fromDate">
+                    <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                    <mat-datepicker #fromDate></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="margin-left-25">
+                    <mat-label>To</mat-label>
+                    <input matInput formControlName="toDate" (click)="toDate.open()" [matDatepicker]="toDate">
+                    <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                    <mat-datepicker #toDate></mat-datepicker>
+                </mat-form-field>
+                <div class="float-right">
+                    <button class="marginLt-5px" mat-raised-button color="warn" id="printpagebutton"
+                        (click)="onDownload('CurrentBet','pdf')">
+                        <i class="fa fa-download" aria-hidden="true"></i> PDF
+                    </button>
+                    <button mat-raised-button color="primary" class="marginLt-5px"
+                        (click)="onDownload('CurrentBet','excel')">
+                        <i class="fa fa-download" aria-hidden="true"></i> Excel
+                    </button>
+                    <button type="submit" class="marginLt-5px" [disabled]="!currentBetsForm.valid" mat-raised-button
+                        color="primary" (click)="onLoadRecordsClick()">Load</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="margin-top-20">
+        <app-data-table [rows]="filteredData" [columns]="tableColumns" [totalRecordsCount]="totalRecords"
+            (pageEvent)="pageEventChange($event)" (rowClicked)="onRowClicked($event)">
+        </app-data-table>
+    </div>
+    <mat-spinner *ngIf="loading$ | async" [diameter]="150" class="mat-spinner-position"></mat-spinner>
+</div>

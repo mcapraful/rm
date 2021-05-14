@@ -1,0 +1,78 @@
+.sp-motor-digit-card {
+  margin: 20px auto;
+  max-width: 650px;
+}
+
+.margin-left-15 {
+  margin-left: 15px !important;
+  font-weight: 600;
+}
+
+.margin-left-10 {
+  margin-left: 10px !important;
+}
+
+.float-right {
+  float: right;
+}
+
+.width {
+  width: 45%;
+}
+
+.note-font {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.number-field {
+  width: 100%;
+}
+
+.amount-field {
+  width: 100%;
+}
+
+.possibility-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+.form-field-motor {
+  width: 30%;
+  display: block;
+  margin: 0 auto;
+}
+
+b.bidding-date {
+  font-size: 16px;
+  background: #090909;
+  padding: 4px 9px 4px 4px;
+  margin-left: 7px;
+}
+
+.radio-helper-text {
+  font-size: 12px;
+}
+
+.bid-details {
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+}
+
+.bid-details span {
+  margin-right: 5px;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .form-field-motor {
+    width: 250px;
+  }
+  .bid-details {
+    flex-direction: column; 
+  }
+}

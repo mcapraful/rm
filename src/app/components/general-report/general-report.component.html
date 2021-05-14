@@ -1,0 +1,45 @@
+<div class="ht-100">
+    <mat-card class="card-background ht-100vh">
+        <div class="accountslist-actions-css">
+            <div class="mTop-7px">
+                <mat-label class="font-weight-500">General Report</mat-label>
+            </div>
+            <div class="mTop-7px">
+                <form [formGroup]="generalReportForm" (ngSubmit)="onFormSubmit()">
+                    <mat-form-field>
+                        <mat-label>Account Type</mat-label>
+                        <mat-select formControlName="reportType" required>
+                            <mat-option>Select</mat-option>
+                            <mat-option *ngFor="let report of reportType" [value]="report">
+                                {{report}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button type="submit" class="float-right" mat-raised-button color="primary">Load</button>
+                </form>
+            </div>
+        </div>
+
+        <app-data-table [rows]="tableRows" [columns]="tableColumns" [totalRecordsCount]="totalRecords"></app-data-table>
+        <mat-card class="mTop-7px">
+            <mat-card-content>
+                <div class="wt-100 upper-level-css">
+                    <span class="label-css">Upper Level Total </span>
+                    <span class="value-css">123345567</span>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="general-total-css">
+                    <div>
+                        <span class="label-css">General Total</span>
+                        <span class="value-css">-6787894337</span>
+                    </div>
+                    <div>
+                        <span class="label-css">General Total</span>
+                        <span class="value-css">6787894337</span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+    </mat-card>
+</div>

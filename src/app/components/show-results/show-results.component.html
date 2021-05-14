@@ -1,0 +1,48 @@
+<div>
+    <mat-card class="ht-100vh">
+        <div class="refresh-result-wrapper">
+            <button mat-raised-button color="primary" (click)="getMatkaResults()">
+                <span class="material-icons">refresh</span>
+                Get Live Results
+            </button>
+        </div>
+        <mat-card>
+            <mat-toolbar class="header-css card-header">
+                <span>Upcoming Results</span>
+            </mat-toolbar>
+            <mat-card-content class="margin-top-15">
+                <ng-container *ngIf="upcomingResults.length===0">
+                    <h2 class="bussiness-results-css">No Upcoming results!</h2>
+                </ng-container>
+                <ng-container *ngIf="upcomingResults.length>0">
+                    <div class="bussiness-results-css  results-border margin-top-10"
+                        *ngFor="let resultObj of upcomingResults">
+                        <div class="bussiness-name">
+                            <span>{{resultObj.MatkaBusinessName}}</span>
+                        </div>
+                        <span
+                            class="result-span margin-top-20">{{resultObj.result?resultObj.result:'Result Not Available'}}</span>
+                        <span class="time-span">{{resultObj.openTime}} - {{resultObj.closeTime}}</span>
+                    </div>
+                </ng-container>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="margin-top-15">
+            <mat-toolbar class="header-css card-header">
+                <span>Live Matka Results</span>
+            </mat-toolbar>
+            <mat-card-content class="margin-top-10">
+                <div class="bussiness-results-css results-border margin-top-10"
+                    *ngFor="let resultObj of allMatkaResults">
+                    <div class="bussiness-name">
+                        <span>{{resultObj.MatkaBusinessName}}</span>
+                    </div>
+                    <span
+                        class="result-span margin-top-20">{{resultObj.result?resultObj.result:'Result Not Available'}}</span>
+                    <span class="time-span">{{resultObj.openTime}} - {{resultObj.closeTime}}</span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-spinner *ngIf="loading$ | async" [diameter]="150" class="mat-spinner-position"></mat-spinner>
+    </mat-card>
+</div>

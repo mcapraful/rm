@@ -1,0 +1,278 @@
+<!-- <form [formGroup]="actionForm"> -->
+<h1 mat-dialog-title>{{data.modalHeader}}
+    <span class="material-icons close-btn" mat-dialog-close>
+        cancel
+    </span>
+</h1>
+
+<mat-dialog-content *ngIf="data.action==='credit'" class="mat-typography  mat-content-wrapper">
+    <form [formGroup]="creditActionForm">
+        <div>
+            <span class="label-css">Old Credit</span>
+            <mat-form-field class="control-css">
+                <input matInput type="text" formControlName="oldCreditLimt" required>
+            </mat-form-field>
+        </div>
+        <div>
+            <span class="label-css">New Credit</span>
+            <mat-form-field class="control-css">
+                <input matInput type="text" formControlName="newCreditLimt" required>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="data.action==='limit'" class="mat-typography mat-content-wrapper">
+    <form [formGroup]="limitActionForm">
+        <div>
+            <span class="label-css">Old Limit</span>
+            <mat-form-field class="control-css">
+                <span matPrefix>₹&nbsp;</span>
+                <input matInput type="text" formControlName="oldLimt" readonly>
+            </mat-form-field>
+        </div>
+        <div>
+            <span class="label-css">New Limit</span>
+            <mat-form-field class="control-css">
+                <span matPrefix>₹&nbsp;</span>
+                <input matInput type="number" formControlName="newLimt">
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="data.action==='password'" class="mat-typography mat-content-wrapper">
+    <form [formGroup]="passwordActionForm">
+
+        <div class="margin-bottom-20">
+            <span class="label-css">New Password</span>
+            <mat-form-field class="control-css">
+                <div class="eye-test-allignment">
+                    <input matInput [type]="showPassword ? 'text':'password'" formControlName="newPass" />
+                    <mat-icon class="cursor-pointer" (click)="showPassword=!showPassword">
+                        {{showPassword ? 'visibility':'visibility_off'}}
+                    </mat-icon>
+                </div>
+                <mat-error *ngIf=" passwordActionForm.get('newPass').invalid">{{getErrorMessage('newPass')}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="margin-bottom-25">
+            <span class=" label-css">Confirm Password</span>
+            <mat-form-field class="control-css">
+                <div class="eye-test-allignment">
+                    <input matInput [type]="showConfirmPassword ? 'text':'password'" formControlName="confirmPass" />
+                    <mat-icon class="cursor-pointer" (click)="showConfirmPassword=!showConfirmPassword">
+                        {{showConfirmPassword ? 'visibility':'visibility_off'}}
+                    </mat-icon>
+                </div>
+                <mat-error *ngIf=" passwordActionForm.get('confirmPass').invalid">{{getErrorMessage('confirmPass')}}
+                </mat-error>
+                <mat-hint class="text-red" *ngIf="passwordActionForm.get('newPass').valid && passwordActionForm.get('confirmPass').valid
+                    && passwordActionForm.value.newPass != passwordActionForm.value.confirmPass">
+                    Password and Confirm password field value doesn't match.
+                </mat-hint>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="data.action==='deposit'" class="mat-typography mat-content-wrapper">
+    <form [formGroup]="depositActionForm">
+        <div>
+            <span class="label-css">{{loggedInUserInfo.username}} Balance</span>
+            <mat-form-field class="control-css">
+                <span matPrefix>₹&nbsp;</span>
+                <input matInput type="text" formControlName="loggedInUserBalance" required readonly>
+            </mat-form-field>
+        </div>
+        <div>
+            <span class="label-css">{{currentUserName}} Balance</span>
+            <mat-form-field class="control-css">
+                <span matPrefix>₹&nbsp;</span>
+                <input matInput type="text" formControlName="currentUserBalance" required readonly>
+            </mat-form-field>
+        </div>
+        <div>
+            <span class="label-css">Amount</span>
+            <mat-form-field class="control-css">
+                <span matPrefix>₹&nbsp;</span>
+                <input matInput type="text" formControlName="amount" required fixTwoDigitDirective>
+                <mat-error *ngIf=" depositActionForm.get('amount').invalid">{{getErrorMessage('amount')}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <span class="label-css">Remark</span>
+            <mat-form-field class="control-css">
+                <input matInput type="textarea" formControlName="remark">
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="data.action==='withdraw'" class="mat-typography mat-content-wrapper">
+    <form [formGroup]="withdrawActionForm">
+        <div>
+            <span class="label-css">{{loggedInUserInfo.username}} Balance</span>
+            <mat-form-field class="control-css" type="text">
+                <span matPrefix>₹&nbsp;</span>
+                <input matInput formControlName="parentUserBalance" required readonly>
+            </mat-form-field>
+        </div>
+        <div>
+            <span class="label-css">{{currentUserName}} Balance</span>
+            <mat-form-field class="control-css">
+                <span matPrefix>₹&nbsp;</span>
+                <input matInput type="text" formControlName="currentUserBalance" required readonly>
+            </mat-form-field>
+        </div>
+        <div>
+            <span class="label-css">Amount</span>
+            <mat-form-field class="control-css">
+                <span matPrefix>₹&nbsp;</span>
+                <input matInput type="text" formControlName="withdrawAmount" fixTwoDigitDirective>
+                <mat-error *ngIf=" withdrawActionForm.get('withdrawAmount').invalid">
+                    {{getErrorMessage('withdrawAmount')}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <span class="label-css">Remark</span>
+            <mat-form-field class="control-css">
+                <input matInput type="textarea" type="text" formControlName="withdrawRemark">
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="data.action==='status'" class="mat-typography mat-content-wrapper ">
+    <form [formGroup]="statusActionForm">
+        <div class="margin-top-10">
+            <mat-label class="status-label-css">User Active</mat-label>
+            <mat-slide-toggle class="value-css" formControlName="userActive"></mat-slide-toggle>
+        </div>
+        <div class="margin-top-10">
+            <mat-label class="status-label-css">Bet Active</mat-label>
+            <mat-slide-toggle class="value-css" formControlName="betActive"></mat-slide-toggle>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="data.action==='showBalance'" class="mat-typography balance-wrapper ">
+    <div class="margin-top-10">
+        <mat-label class="status-label-css">Account Type</mat-label>
+        <span class="value-css">{{data.popupData.accountType}}</span>
+    </div>
+    <div class="margin-top-10" *ngIf="data.popupData.accountType!=='User' && data.popupData.accountType!=='Admin'">
+        <mat-label class="status-label-css">Upper Level</mat-label>
+        <span class="value-css">₹{{data.popupData.upperlevel}}</span>
+    </div>
+    <div class="margin-top-10">
+        <mat-label class="status-label-css">Available Balance</mat-label>
+        <span class="value-css">₹{{data.popupData.availableBalance }}</span>
+    </div>
+    <div class="margin-top-10">
+        <mat-label class="status-label-css">Credit Referance</mat-label>
+        <span class="value-css">₹{{data.popupData.creditReferance }}</span>
+    </div>
+    <div class="margin-top-10">
+        <mat-label class="status-label-css">Master Balance</mat-label>
+        <span class="value-css">₹{{data.popupData.masterBalance }}</span>
+    </div>
+    <div class="margin-top-10">
+        <mat-label class="status-label-css">My Account Status</mat-label>
+        <span class="value-css">{{data.popupData.userStatus?'Active' : 'In Active'}}</span>
+    </div>
+    <div *ngIf="data.popupData.accountType==='User'" class="margin-top-10">
+        <mat-label class="status-label-css">Betting Status</mat-label>
+        <span class="value-css">{{data.popupData.bettingStatus?'Active' : 'In Active'}}</span>
+    </div>
+    <div *ngIf="data.popupData.accountType!=='User'" class="margin-top-10">
+        <mat-label class="status-label-css">Self Share</mat-label>
+        <span class="value-css">{{data.popupData.default}}%</span>
+    </div>
+    <div *ngIf="data.popupData.accountType==='User'" class="margin-top-10">
+        <mat-label class="status-label-css">Exposure Limit</mat-label>
+        <span class="value-css">₹{{data.popupData.exposerLimit}}</span>
+    </div>
+    <div *ngIf="data.popupData.accountType==='User'" class="margin-top-10">
+        <mat-label class="status-label-css">Exposure</mat-label>
+        <span class="value-css">₹{{data.popupData.exposer }}</span>
+    </div>
+    <div class="margin-top-10">
+        <mat-label class="status-label-css">Profit Loss</mat-label>
+        <span class="value-css">₹{{data.popupData.profitLoss }}</span>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="data.action==='submitResult'" class="mat-typography  mat-content-wrapper">
+    <form [formGroup]="submitResultForm">
+        <mat-card-content class="margin-top-10">
+            <mat-form-field>
+                <mat-label>Select bussiness type</mat-label>
+                <mat-select formControlName="bussinessType" [(value)]="selected">
+                    <mat-option *ngFor="let type of data.businessType ; let i = index" [value]="i">
+                        {{ type.bussinessName }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf=" submitResultForm.get('bussinessType').invalid">{{getErrorMessage('bussinessType')}}
+                </mat-error>
+            </mat-form-field>
+            <div class="margin-top-30">
+                <mat-radio-group aria-label="Select an option" formControlName="showType">
+                    <mat-radio-button value="Open" class="right-space">Open</mat-radio-button>
+                    <mat-radio-button class="margin-left-20" value="Close">Close</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <mat-form-field class="margin-top-30">
+                <mat-label class="control-css">Enter Result</mat-label>
+                <input matInput type="text" formControlName="result" />
+                <mat-error *ngIf="submitResultForm.get('result').invalid">{{getErrorMessage('result')}}
+                </mat-error>
+            </mat-form-field>
+        </mat-card-content>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="data.action==='result'" class="mat-typography  mat-content-wrapper">
+    <h2><i class="fa fa-bars" aria-hidden="true"></i> Live Updates</h2>
+    <mat-divider></mat-divider>
+    <mat-list>
+        <mat-list-item *ngFor="let event of events"> <i class="fa fa-check-square-o" aria-hidden="true"></i> {{event}}
+        </mat-list-item>
+    </mat-list>
+    <mat-divider></mat-divider>
+    <div class="top-space">
+        <h2><i class="fa fa-bars" aria-hidden="true"></i> Matka Results Live</h2>
+        <h3 class="text-center">
+            <i class="fa fa-gift" aria-hidden="true"></i> Event Name <i class="fa fa-gift" aria-hidden="true"></i>
+        </h3>
+        <h4 class="result">267-59-577</h4>
+
+        <h3 class="text-center">
+            <i class="fa fa-gift" aria-hidden="true"></i> Event Name <i class="fa fa-gift" aria-hidden="true"></i>
+        </h3>
+        <h4 class="result">267-59-577</h4>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-content *ngIf="data.action==='getBetDetails'" class="mat-typography  mat-content-wrapper">
+    <mat-list>
+        <mat-list-item *ngFor="let detail of data.betDetails">
+            {{detail.Number}} = > {{detail.Amount}}
+        </mat-list-item>
+    </mat-list>
+</mat-dialog-content>
+
+<mat-dialog-actions *ngIf="data.action==='passwordChange'" class="actions-alignment">
+    <button mat-raised-button color="primary">Change Password</button>
+</mat-dialog-actions>
+
+<mat-dialog-actions *ngIf="data.action!=='passwordChange'" class="actions-alignment">
+    <button mat-raised-button color="warn" mat-dialog-close>
+        Cancel</button>
+    <button *ngIf="data.action!='showBalance' && data.action!='getBetDetails'" mat-raised-button color="primary"
+        (click)="onSubmit()" cdkFocusInitial>Submit</button>
+</mat-dialog-actions>
+<!-- </form> -->

@@ -1,0 +1,41 @@
+<ngx-datatable id="data-table" class="material striped" [rows]="rows"
+  [columnMode]="columnMode==='flex'?ColumnMode.flex:ColumnMode.force" [headerHeight]="50" [footerHeight]="50"
+  [rowHeight]="50" [scrollbarH]="true" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+  [limit]="page.size" (activate)="onRowClicked($event)" (page)="setPage($event)" [reorderable]="false">
+  <ng-container *ngFor="let column of columns">
+    <ngx-datatable-column [cellClass]="getCellClass" [name]="column.displayName" [prop]="column.fieldName"
+      [resizeable]="false" [sortable]="column.sortable" [width]="column.width" [flexGrow]="column.flexGrow"
+      [cellTemplate]="column.cellTemplate">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <div>
+          <ng-container *ngIf="column.type === 'text'">
+            <span [title]="value">{{ value }}</span>
+          </ng-container>
+          <ng-container *ngIf="column.type === 'class' && findClassName(column.iconClass,column,row)">
+            <ng-container *ngIf=row[column.fieldName]>
+              <span [class]="findClassName(column.iconClass,column,row)" style="font-size: 20px;cursor:pointer">
+              </span>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="column.type === 'template'">
+            <ng-container *ngIf="row[column.fieldName].type==='button'">
+              <button mat-raised-button class="table-btn">{{row[column.fieldName].displayValue}}</button>
+            </ng-container>
+            <ng-container *ngIf="row[column.fieldName].type==='checkbox'">
+              <input type="checkbox" [checked]="value" (change)="onCheckBoxClick(!value)">
+            </ng-container>
+          </ng-container>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+  </ng-container>
+</ngx-datatable>
+<ng-template #actions let-row="row" let-value="value">
+  <div class="icon-size">
+    <img src="../../../assets/images/deposit.png" (click)="onActionClick(row,'deposit')" />
+    <img src="../../../assets/images/withdraw.png" (click)="onActionClick(row,'withdraw')" />
+    <img *ngIf="row['accountType'] == 'User'" src="../../../assets/images/limit.png"
+      (click)="onActionClick(row,'limit')" />
+    <img src="../../../assets/images/password.png" (click)="onActionClick(row,'password')" />
+    <img src="../../../assets/images/status.png" (click)="onActionClick(row,'status')" /></div>
+</ng-template>

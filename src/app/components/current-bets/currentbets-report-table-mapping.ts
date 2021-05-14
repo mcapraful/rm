@@ -1,0 +1,58 @@
+export const currentBetsTableMapping = [
+  {
+    displayName: 'Date',
+    type: 'text',
+    fieldName: 'placeDate',
+    width: 200,
+    sortable: true,
+  },
+  {
+    displayName: 'Business Name',
+    type: 'text',
+    fieldName: 'BusinessName',
+    width: 150,
+    sortable: true,
+  },
+  {
+    displayName: 'Game Name',
+    type: 'text',
+    fieldName: 'GameName',
+    width: 120,
+    sortable: true,
+  },
+  {
+    displayName: 'Show Type',
+    type: 'text',
+    fieldName: 'showType',
+    width: 110,
+    sortable: true,
+  },
+  {
+    displayName: 'User Name',
+    type: 'text',
+    fieldName: 'UserName',
+    width: 110,
+    sortable: true,
+  },
+  {
+    displayName: 'Status',
+    type: 'text',
+    fieldName: 'status',
+    width: 100,
+    sortable: true,
+  },
+  {
+    displayName: 'Amount',
+    type: 'text',
+    fieldName: 'amount',
+    width: 100,
+    sortable: true,
+  },
+  {
+    displayName: 'Details',
+    type: 'template',
+    fieldName: 'details',
+    width: 120,
+    sortable: false,
+  },
+];

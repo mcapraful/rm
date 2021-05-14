@@ -1,0 +1,37 @@
+<div class="ht-100">
+  <mat-card class="card-background ht-auto">
+    <div class="mTop-7px margin-bottom">
+      <mat-label class="font-weight-500 page-heading">Market Analysis</mat-label>
+      <hr />
+    </div>
+    <mat-accordion *ngFor="let business of bussinesList">
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h1>{{business.name}}</h1>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-accordion *ngFor="let game of gamesList">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+            (click)="onGamePanelClick(business.id,game.id)">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="market-analysis-gameList">
+                {{game.name}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <span *ngIf="masterAnalysisData[business.id]">
+              <div *ngFor="let marketAnalysis of masterAnalysisData[business.id][game.id]?.data">
+                <p class="market-analysis-gameListValue"> ({{marketAnalysis.number}}) => {{marketAnalysis.amount}} RS
+                </p>
+              </div>
+              <span *ngIf="masterAnalysisData[business.id][game.id]?.data">
+                <p *ngIf="!masterAnalysisData[business.id][game.id]?.data.length" class="market-analysis-gameListValue"> No
+                  data available for this selection</p>
+              </span>
+            </span>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card>
+</div>

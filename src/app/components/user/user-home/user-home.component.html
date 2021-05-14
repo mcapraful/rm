@@ -1,0 +1,23 @@
+<div class="ht-100vh">
+    <mat-card class="page-bg">
+        <mat-card-content>
+            <div class="margin-top-20 total-amount-css">
+                <button class="marginLt-5px" mat-raised-button (click)="showCreditBalance()">
+                    Account Summary
+                </button>
+            </div>
+            <div class="margin-top-20">
+                <app-data-table [rows]="homeTableRows" [columns]="homeTableColumns" [totalRecordsCount]="totalRecords">
+                </app-data-table>
+            </div>
+            <div class="games-container margin-top-10">
+                <img class="image-css" src="../../../assets/images/ludo.png">
+                <img class="image-css" src="../../../assets/images/carrom.png">
+                <img class="image-css" src="../../../assets/images/rummy-icon.jpg">
+                <img class="image-css" src="../../../assets/images/teen_patti.png">
+                <img class="image-css" src="../../../assets/images/andar_bahar.jpg">
+            </div>
+        </mat-card-content>
+        <mat-spinner *ngIf="loading$ | async" [diameter]="150" class="mat-spinner-position"></mat-spinner>
+    </mat-card>
+</div>

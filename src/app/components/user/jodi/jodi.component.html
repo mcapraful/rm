@@ -1,0 +1,89 @@
+<div>
+    <mat-toolbar class="bet-header-container display-flex-spacebetween">
+        <span>
+            <span class="home-button-wrapper">
+                <button mat-icon-button>
+                    <mat-icon [routerLink]="['/home/user/user-dashboard']" matTooltip="Click here to go home">home
+                    </mat-icon>
+                </button>
+                <span class="d-inline-block">{{matkaBussiness?.name}}</span>
+            </span>
+        </span>
+        <span class="bid-card-header font-size-15px" *ngIf="matkaBussiness">
+            <mat-label class="balance-class">Open Result : {{matkaBussiness?.openTime}}</mat-label>
+            <mat-label class="balance-class margin-top-15px">Close Result: {{matkaBussiness?.closeTime}}</mat-label>
+        </span>
+    </mat-toolbar>
+    <mat-card class="jodi-card">
+        <mat-toolbar class="header-css">
+            <span>Jodi</span>
+        </mat-toolbar>
+        <div class="margin-top-10">
+            <p class="note-font">Note: Bet amount should be greater than or equal to 5.</p>
+        </div>
+        <mat-card-content class="bid-card-actions margin-top-20">
+            <div class="today-date">
+                <p class="margin-left-15 bid-details">
+                   <span> Place Bid for - <b class="bidding-date"> {{this.bidDate}}</b></span>
+                   <span>Available Balance - <b class="bidding-date">₹ {{this.loggedInUserInfo?.availableBalance}}</b></span>
+                   <span>Exposure - <b class="bidding-date">₹ {{this.loggedInUserInfo?.exposer}}</b></span>
+                </p>
+            </div>
+            <div class="content-center-align">
+                <div class="jodi-chips-container selected-jodi margin-top-20 margin-bottom-20">
+                    <mat-chip-list class="chiplist-container-selected">
+                        <mat-chip class="cursor-pointer selected-jodi-chip" matChipRemove [removable]="true"
+                            (removed)="remove(selectedJodi)" *ngFor="let selectedJodi of selectedjodiDigitsArray">
+                            <mat-icon matChipRemove class="left-icon">check_circle_outline</mat-icon>
+                            {{selectedJodi.uiValue}}
+                            <mat-icon matChipRemove class="right-icon">cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
+            <div class="content-center-align border-radius-10">
+                <button mat-button mat-raised-button (click)="intializeJodi()" class="wt-100 bet-header-container">
+                    <span class="padding-left-15">
+                        Select Jodi
+                        <mat-icon class="right-chevron-icon">chevron_right</mat-icon>
+                    </span>
+                </button>
+            </div>
+            <div class="content-center-align">
+                <!-- {{jodiDigitsArray | json}} -->
+                <div class="jodi-chips-container margin-top-20 margin-bottom-20">
+                    <mat-chip-list class="chiplist-container">
+                        <mat-chip class="cursor-pointer" *ngFor="let jodi of jodiDigitsArray"
+                            (click)="selectAndRemoveJodiDigit(jodi)">
+                            {{jodi.uiValue}}
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
+            <div class="amount-total-wrapper text-center">
+                <span class="amount-section">
+                    <mat-label class="amount-label">Enter Amount</mat-label>
+                    <mat-form-field appearance="outline" class="amount-field margin-left-10">
+                        <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                        <input matInput type="text" [(ngModel)]="amount">
+                    </mat-form-field>
+                </span>
+                <div class="amount-label margin-top-20 margin-left-20"> Total Amount
+                    <span class="margin-left-20">₹</span>
+                    <span
+                        class="margin-left-5">{{(amount && selectedjodiDigitsArray.length ) ? (amount*selectedjodiDigitsArray.length) : '0'}}</span>
+                </div>
+            </div>
+            <div class="margin-top-10">
+                <p *ngIf="openCloseTimeError" class="text-red"> Open or close result time passed for Today's bet. Please try after 10 minutes </p>
+                <button type="button" mat-raised-button color="primary"
+                    [disabled]="(!amount) || selectedjodiDigitsArray?.length === 0" (click)="onPlaceBetClick()">
+                    Place Bet
+                </button>
+                <button class="float-right" type="button" (click)="reset()" title="Click to clear all selections"
+                    mat-raised-button color="primary">Reset</button>
+            </div>
+        </mat-card-content>
+        <mat-spinner *ngIf="loading$ | async" class="mat-spinner-position"></mat-spinner>
+    </mat-card>
+</div>

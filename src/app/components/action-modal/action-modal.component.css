@@ -1,0 +1,74 @@
+mat-form-field {
+  width: 100%;
+}
+
+.label-css {
+  display: inline-block;
+  width: 30%;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.status-label-css {
+  width: 50%;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.value-css {
+  display: inline-block;
+  width: 50%;
+}
+
+.control-css {
+  display: inline-block;
+  width: 70%;
+}
+
+.mat-content-wrapper {
+  width: 500px;
+}
+
+.balance-wrapper {
+  width: 360px;
+}
+
+.actions-alignment {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-dialog-title {
+  background: #ddd !important;
+  padding: 9px;
+  margin: -24px -24px 24px -24px !important;
+}
+
+.mat-dialog-actions {
+  background: #ddd !important;
+  padding: 3px;
+  margin: 24px -24px -24px -24px !important;
+}
+
+.close-btn {
+  margin-top: 5px;
+  float: right;
+  cursor: pointer;
+}
+
+.result {
+  background: black;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .mat-content-wrapper {
+    max-width: 300px;
+  }
+ .balance-wrapper {
+    max-width: 250px;
+  }
+}

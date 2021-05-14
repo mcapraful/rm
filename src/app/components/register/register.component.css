@@ -1,0 +1,61 @@
+mat-grid-tile {
+  background: lightblue;
+}
+
+.register-section {
+  color: #fff;
+  background-image: linear-gradient(-90deg, #ddd, purple);
+  padding: 4px;
+  display: inline-block;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.register-form-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.width-47 {
+  width: 47%;
+}
+
+table {
+  width: 100%;
+  border-radius: 5px;
+}
+table th {
+  text-align: left;
+}
+
+.master-password-div {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.mat-spinner-position {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.text-red {
+  color: red !important;
+}
+
+@media (min-width: 320px) and (max-width: 1299px) {
+  .width-47 {
+    width: 90%;
+  }
+  .register-form-div {
+    flex-direction: column;
+  }
+}

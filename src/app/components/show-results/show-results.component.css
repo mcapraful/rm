@@ -1,0 +1,52 @@
+.bussiness-results-css {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.results-border {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+.result-span {
+  font-size: 30px;
+  font-weight: 700;
+  color: red;
+}
+
+.time-span {
+  font-weight: 500;
+  margin-top: 15px;
+  font-style: italic;
+  color: darkcyan;
+}
+
+.bussiness-name {
+  width: 100%;
+  text-align: center;
+  background-color: lightslategray;
+  margin-top: 10px;
+  font-size: 30px;
+  line-height: 50px;
+  color: white;
+  font-weight: 700;
+}
+
+.refresh-result-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px !important;
+}
+
+.card-header {
+  font-size: 35px;
+}
+
+.mat-spinner-position {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}

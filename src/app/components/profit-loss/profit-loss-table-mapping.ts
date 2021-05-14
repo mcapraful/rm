@@ -1,0 +1,51 @@
+export const profitLossTableMapping = [
+  {
+    displayName: 'Date',
+    type: 'text',
+    fieldName: 'transactionDate',
+    width: 200,
+    sortable: true,
+  },
+  {
+    displayName: 'Amount',
+    type: 'text',
+    fieldName: 'amount',
+    width: 100,
+    sortable: true,
+  },
+  {
+    displayName: 'Transaction Type',
+    type: 'text',
+    fieldName: 'transactionType',
+    width: 150,
+    sortable: true,
+  },
+  {
+    displayName: 'Closing Balance',
+    type: 'text',
+    fieldName: 'fromUserClosingBalance',
+    width: 150,
+    sortable: true,
+  },
+  {
+    displayName: 'From User',
+    type: 'text',
+    fieldName: 'fromUser',
+    width: 100,
+    sortable: true,
+  },
+  {
+    displayName: 'To User',
+    type: 'text',
+    fieldName: 'toUser',
+    width: 100,
+    sortable: true,
+  },
+  {
+    displayName: 'Remark',
+    type: 'text',
+    fieldName: 'remark',
+    width: 100,
+    sortable: true,
+  },
+];

@@ -1,0 +1,35 @@
+.data-table-css {
+  word-break: break-all;
+}
+
+.table-icons {
+  margin-left: 10px;
+}
+
+.table-btn {
+  cursor: pointer;
+  width: 80px;
+  font-size: 12px;
+  line-height: 25px;
+  background-color: dimgrey;
+  color: white;
+}
+
+.icon-size img {
+  height: 30px;
+  width: 27px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+datatable-header-cell {
+  background-color: #414141 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+}
+
+datatable-body-cell {
+  border: 0.5px solid lightgray;
+  border-radius: 5px;
+}

@@ -1,0 +1,60 @@
+.accountslist-actions-css {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 5px;
+}
+.font-weight-500 {
+  font-weight: 500;
+}
+
+.marginLt-5px {
+  margin-left: 5px;
+}
+
+.add-acc-btn {
+  background-color: limegreen;
+  color: white;
+}
+
+.mTop-7px {
+  margin-top: 7px;
+}
+
+/* .card-background {
+  background-color: #9a69db;
+} */
+
+.search-box {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-right: 5px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 90%;
+}
+
+.mat-spinner-position {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/* .mat-form-field-label {
+  color: #000 !important;
+} */
+
+@media (min-width: 320px) and (max-width: 1299px) {
+  .accountslist-actions-css, .search-box {
+    flex-direction: column;
+  }
+  .search-input {
+    max-width: 250px;
+    margin-top: 10px;
+  }
+}

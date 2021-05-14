@@ -1,0 +1,77 @@
+<div class="ht-auto">
+    <mat-card class="margin-20">
+        <mat-card-header class="bid-card-header">
+            <span class="title-css">
+                <p class="title-label">
+                    {{eventData?.bussinessName}}
+                </p>
+            </span>
+            <h2>{{eventData?.availabelDays?.toString()}}</h2>
+            <h2>Result</h2>
+            <span class="open-close-css">
+                <h2>Open: {{eventData?.openTimings}}</h2>
+                <h2 class="margin-left-50">Close: {{eventData?.closeTimings}}</h2>
+            </span>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card class="margin-top-20">
+                <mat-card-header class="bid-card-header card-header-color">
+                    <mat-card-title class="card-title-css">
+                        Bid On
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="bid-card-actions margin-top-20">
+                    <img src="../../../../assets/images/digit.png" class="icons-height-100 cursor-pointer"
+                        (click)="navigateToRoute('/home/user/single-digit','Digit')">
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="margin-top-20">
+                <mat-card-header class="bid-card-header card-header-color">
+                    <mat-card-title class="card-title-css">
+                        Bid On Jodi
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="bid-card-actions margin-top-20">
+                    <img src="../../../../assets/images/two-digit.png" class="icons-height-100 cursor-pointer"
+                        (click)="navigateToRoute('/home/user/jodi','Jodi')">
+                    <img src="../../../../assets/images/red-bracket.png" class="icons-height-100 cursor-pointer"
+                        (click)="navigateToRoute('/home/user/red-bracket','Red Bracket')">
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="margin-top-20">
+                <mat-card-header class="bid-card-header card-header-color">
+                    <mat-card-title class="card-title-css">
+                        Bid On Patti
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="bid-card-actions margin-top-20">
+                    <img src="../../../../assets/images/single-patti.png"
+                        (click)="navigateToRoute('/home/user/single-patti','Single Patti')"
+                        class="icons-height-100 cursor-pointer">
+                    <img src="../../../../assets/images/double-patti.png"
+                        (click)="navigateToRoute('/home/user/double-patti','Double Patti')"
+                        class="icons-height-100 cursor-pointer">
+                    <img src="../../../../assets/images/teen-patti.png"
+                        (click)="navigateToRoute('/home/user/triple-patti','Triple Patti')"
+                        class="icons-height-100 cursor-pointer">
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="margin-top-20">
+                <mat-card-header class="bid-card-header card-header-color">
+                    <mat-card-title class="card-title-css">
+                        Bid On Motor
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="bid-card-actions margin-top-20">
+                    <img src="../../../../assets/images/sp-motor.png"
+                        (click)="navigateToRoute('/home/user/sp-motor','SP Motor')"
+                        class="icons-height-100 cursor-pointer">
+                    <img src="../../../../assets/images/dp-motor.png"
+                        (click)="navigateToRoute('/home/user/dp-motor','DP Motor')"
+                        class="icons-height-100 cursor-pointer">
+                </mat-card-content>
+            </mat-card>
+        </mat-card-content>
+        <mat-spinner *ngIf="loading$ | async" [diameter]="150" class="mat-spinner-position"></mat-spinner>
+    </mat-card>
+</div>

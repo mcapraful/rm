@@ -1,0 +1,147 @@
+<div>
+  <mat-card class="page-bg">
+    <mat-card-header>
+      <mat-card-title class="page-heading">Add Account</mat-card-title>
+    </mat-card-header>
+    <hr />
+    <mat-card-content><br />
+      <form [formGroup]="registerForm" (ngSubmit)="onAddAccoutClick()" #formGroupDirective="ngForm">
+        <div class="register-form-div">
+          <mat-card class="width-47">
+            <div>
+              <mat-label class="register-section">Personal Details</mat-label>
+            </div>
+            <mat-card-content class="margin-top-10">
+              <mat-form-field class="margin-bottom-10">
+                <input matInput type="text" formControlName="userName" placeholder="User name" />
+                <mat-error *ngIf="registerForm.get('userName').invalid">{{getErrorMessage('userName')}}
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="margin-bottom-10">
+                <div class="eye-test-allignment">
+                  <input matInput [type]="showPassword? 'text':'password'" formControlName="password"
+                    placeholder="Password" />
+                  <mat-icon class="cursor-pointer" (click)="showPassword=!showPassword">
+                    {{showPassword ? 'visibility':'visibility_off'}}
+                  </mat-icon>
+                </div>
+                <mat-error *ngIf="registerForm.get('password').invalid">{{getErrorMessage('password')}}</mat-error>
+              </mat-form-field>
+              <mat-form-field class="margin-bottom-10">
+                <div class="eye-test-allignment">
+                  <input matInput [type]="showConfirmPassword? 'text':'password'" formControlName="confirmPassword"
+                    placeholder="Confirm password" />
+                  <mat-icon class="cursor-pointer" (click)="showConfirmPassword=!showConfirmPassword">
+                    {{showConfirmPassword ? 'visibility':'visibility_off'}}
+                  </mat-icon>
+                </div>
+                <mat-error *ngIf="registerForm.get('confirmPassword').invalid">
+                  {{getErrorMessage('confirmPassword')}}
+                </mat-error>
+                <mat-hint class="text-red" *ngIf="registerForm.get('confirmPassword').valid && registerForm.get('password').valid
+                    && registerForm.value.confirmPassword != registerForm.value.password">
+                  Password and Confirm password field value doesn't match.
+                </mat-hint>
+              </mat-form-field>
+              <mat-form-field class="margin-bottom-10">
+                <input matInput type="text" formControlName="fullName" placeholder="Full name" />
+                <mat-error *ngIf="registerForm.get('fullName').invalid">{{getErrorMessage('fullName')}}</mat-error>
+              </mat-form-field>
+              <mat-form-field class="margin-bottom-10">
+                <input matInput type="text" formControlName="city" placeholder="City" />
+                <mat-error *ngIf="registerForm.get('city').invalid">{{getErrorMessage('city')}}</mat-error>
+              </mat-form-field>
+              <mat-form-field class="margin-bottom-10">
+                <input matInput type="text" formControlName="phoneNumber" placeholder="Contact number" />
+                <mat-error *ngIf="registerForm.get('phoneNumber').invalid">{{getErrorMessage('phoneNumber')}}
+                </mat-error>
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="width-47">
+            <div>
+              <mat-label class="register-section">Account Details</mat-label>
+            </div>
+            <mat-card-content class="margin-top-10">
+              <mat-form-field class="margin-bottom-10">
+                <mat-label>Select account type</mat-label>
+                <mat-select formControlName="accountType" (selectionChange)="onSelect($event)">
+                  <mat-option *ngFor="let type of accountTypes" [value]="type.value">
+                    {{ type.displayValue }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="registerForm.get('accountType').invalid">{{getErrorMessage('accountType')}}
+                </mat-error>
+              </mat-form-field>
+              <div>
+                <mat-form-field class="d-inline-block wd-50 margin-bottom-10">
+                  <input matInput type="number" formControlName="creditReference" placeholder="Credit reference" />
+                  <mat-error *ngIf="registerForm.get('creditReference').invalid">{{getErrorMessage('creditReference')}}
+                  </mat-error>
+                </mat-form-field>
+                <span class="d-inline-block padding-left-10" *ngIf="loggedInUserDetails">
+                  Available Balance:
+                  <span class="bold">
+                    {{(loggedInUserDetails?.availableBalance - registerForm.value.creditReference) > 0 ? 
+                          '₹'+(loggedInUserDetails?.availableBalance - registerForm.value.creditReference) : '₹' + loggedInUserDetails?.availableBalance}}
+                  </span>
+                </span>
+              </div>
+
+              <mat-form-field *ngIf="isSelectedAccountTypeUser" class="margin-bottom-10">
+                <input matInput type="number" formControlName="exposerLimit" placeholder="Exposer limit" />
+                <mat-error *ngIf="registerForm.get('exposerLimit').invalid">{{getErrorMessage('exposerLimit')}}
+                </mat-error>
+              </mat-form-field><br /><br />
+
+              <div *ngIf="!isSelectedAccountTypeUser">
+                <mat-label class="register-section">Minus(-) Commission Setting</mat-label>
+                <mat-form-field *ngIf="registerForm.get('commLimit')" class="margin-bottom-10">
+                  <input matInput type="number" formControlName="commLimit"
+                    placeholder="Please enter commission in %" />
+                  <mat-error *ngIf="registerForm.get('commLimit').invalid">
+                    {{getErrorMessage('commLimit')}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div *ngIf="!isSelectedAccountTypeUser" class="page-section">
+          <div class="margin-top-20 padding">
+            <mat-label class="register-section">Partnership</mat-label>
+          </div>
+          <div class="padding">
+            <mat-form-field *ngIf="registerForm.get('upline')" class="margin-bottom-10">
+              <input matInput type="text" formControlName="upline" placeholder="Upline in %" readonly />
+              <mat-error *ngIf="registerForm.get('upline').invalid">
+                {{getErrorMessage('upline')}}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field *ngIf="registerForm.get('downline')" class="margin-bottom-10">
+              <input matInput type="number" formControlName="downline" placeholder="Downline in %" />
+              <mat-error *ngIf="registerForm.get('downline').invalid">
+                {{getErrorMessage('downline')}}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field *ngIf="registerForm.get('our')" class="margin-bottom-10">
+              <input matInput type="text" formControlName="our" placeholder="Our in %" readonly />
+              <mat-error *ngIf="registerForm.get('our').invalid">
+                {{getErrorMessage('our')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div><br />
+
+        <div class="login-button-div">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid || registerForm.get('password').valid && registerForm.get('confirmPassword').valid
+                                && registerForm.value.password != registerForm.value.confirmPassword">
+            Add Account</button>&nbsp;
+          <button mat-raised-button color="default" type="clear">Clear</button>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-spinner *ngIf="loading$ | async" [diameter]="150" class="mat-spinner-position"></mat-spinner>
+  </mat-card>
+</div>

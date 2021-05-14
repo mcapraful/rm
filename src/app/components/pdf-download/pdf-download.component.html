@@ -1,0 +1,138 @@
+<div *ngIf="id == 'ClientDetails'" class="margin-16">
+    <table id="data-table-dwn">
+        <div class="mTop-7px">
+            <mat-label class="font-weight-500 page-heading">Account List</mat-label>
+            <hr />
+        </div>
+        <tr>
+            <th>User Name</th>
+            <th>Credit Reference</th>
+            <th>Master Balance</th>
+            <th>Client(P/L)</th>
+            <th>Exposure</th>
+            <th>Available Balance</th>
+            <th>U St</th>
+            <th>B St</th>
+            <th>Exposure Limit</th>
+            <th>Default</th>
+            <th>Account Type</th>
+            <th>- Commission</th>
+        </tr>
+        <tr *ngFor="let client of totalRecords">
+            <td>{{client.username}}</td>
+            <td>{{client.creditReferance}}</td>
+            <td>{{client.exposer+client.availableBalance}}</td>
+            <td>{{client.profitLoss}}</td>
+            <td>{{client.accountType === 'User' ? client.exposer : 'N.A.'}}</td>
+            <td>{{client.availableBalance}}</td>
+            <td>{{client.userStatus ? "Active" : "In Active"}}</td>
+            <td>{{client.bettingStatus ? "Active" : "In Active"}}</td>
+            <td>{{client.accountType === 'User' ? client.exposerLimit : 'N.A.'}}</td>
+            <td>{{client.accountType === 'User' ? 'N.A.' : client.ourPercentage}}</td>
+            <td>{{client.accountType}}</td>
+            <td>{{client.accountType === 'User' ? 'N.A.' : client.commissionPecentage}}</td>
+        </tr>
+    </table>
+</div>
+<div *ngIf="id == 'accountStatement'" class="margin-16">
+    <table id="data-table-dwn">
+        <div class="mTop-7px">
+            <mat-label class="font-weight-500 page-heading">Account Statement</mat-label>
+            <hr />
+        </div>
+
+        <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Transaction Type</th>
+            <th>Closing Balance</th>
+            <th>From User</th>
+            <th>To User</th>
+            <th>Remark</th>
+        </tr>
+        <tr *ngFor="let transaction of transationDetails">
+            <td>{{transaction.transactionDate | date: 'MM/dd/yyyy'}}</td>
+            <td>{{transaction.amount}}</td>
+            <td>{{transaction.transactionType}}</td>
+            <td>{{transaction.fromUserClosingBalance}}</td>
+            <td>{{transaction.fromUser}}</td>
+            <td>{{transaction.toUser}}</td>
+            <td>{{transaction.remark}}</td>
+        </tr>
+    </table>
+</div>
+
+
+<div *ngIf="id == 'CurrentBet'" class="margin-16">
+    <table id="data-table-dwn">
+        <div class="mTop-7px">
+            <mat-label class="font-weight-500 page-heading">Current Bet Statement</mat-label>
+            <hr />
+        </div>
+        <tr>
+            <th>Business Name</th>
+            <th>Game Name</th>
+            <th>User Name</th>
+            <th>Status</th>
+            <th>Amount</th>
+            <th>Place Date</th>
+        </tr>
+        <tr *ngFor="let betTransaction of bettingTransations">
+            <td>{{betTransaction.BusinessName}}</td>
+            <td>{{betTransaction.amount}}</td>
+            <td>{{betTransaction.GameName}}</td>
+            <td>{{betTransaction.UserName}}</td>
+            <td>{{betTransaction.status}}</td>
+            <td>{{betTransaction.placeDate | date: 'MM/dd/yyyy'}}</td>
+        </tr>
+    </table>
+
+</div>
+
+<div *ngIf="id == 'ProfitLoss'" class="margin-16">
+    <table id="data-table-dwn">
+        <div class="mTop-7px">
+            <mat-label class="font-weight-500 page-heading">Profit Loss Statement</mat-label>
+            <hr />
+        </div>
+        <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Transaction Type</th>
+            <th>Closing Balance</th>
+            <th>From User</th>
+            <th>To User</th>
+            <th>Remark</th>
+        </tr>
+        <tr *ngFor="let PLTransaction of profitLossTransations">
+            <td>{{PLTransaction.transactionDate | date: 'MM/dd/yyyy'}}</td>
+            <td>{{PLTransaction.amount}}</td>
+            <td>{{PLTransaction.transactionType}}</td>
+            <td>{{PLTransaction.fromUserClosingBalance}}</td>
+            <td>{{PLTransaction.fromUser}}</td>
+            <td>{{PLTransaction.toUser}}</td>
+            <td>{{PLTransaction.remark}}</td>
+        </tr>
+    </table>
+
+</div>
+
+
+
+
+<div class="pdf-excel-wrapper margin-top-10">
+    <button *ngIf="action==='pdf'" class="margin-rt-20" mat-raised-button color="warn" id="printpagebutton"
+        (click)="onClick()">
+        <i class="fa fa-download" aria-hidden="true"></i> PDF
+    </button>
+    <button *ngIf="action==='excel'" class="margin-rt-20" mat-raised-button color="primary" (click)="onDownLoadExcel()">
+        <i class="fa fa-download" aria-hidden="true"></i> Excel
+    </button>
+</div>
+
+
+
+
+
+
+<mat-spinner *ngIf="loading$ | async" [diameter]="150" class="mat-spinner-position"></mat-spinner>

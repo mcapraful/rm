@@ -1,0 +1,45 @@
+<div class="login-css">
+  <div>
+    <div class="rm-logo-div">
+      <img src="../../../assets/images/logo.png" class="rm-logo" />
+    </div>
+    <div class="login-card-div">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Sign In</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="loginForm" (ngSubmit)="onLoginClick()">
+            <mat-form-field appearance="outline">
+              <div class="input-css">
+                <input matInput type="text" formControlName="username" placeholder="User Name" />
+                <mat-icon matSuffix>account_circle</mat-icon>
+              </div>
+
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <div class="input-css">
+                <input matInput [type]="showPassword ? 'text':'password'" formControlName="password"
+                  placeholder="Password" />
+                <mat-icon class="cursor-pointer" (click)="showPassword=!showPassword">
+                  {{showPassword ? 'visibility':'visibility_off'}}
+                </mat-icon>
+              </div>
+            </mat-form-field>
+            <div class="login-button-div">
+              <button [disabled]="!loginForm.valid" [class.spinner]="loading" [disabled]="loading" mat-raised-button
+                color="warn" type="submit">
+                Login
+                <!-- <mat-icon *ngIf="!loading$ | async" matSuffix>login</mat-icon> -->
+                <!-- <mat-spinner *ngIf="loading$ | async" [diameter]="20" class="mat-spinner-position"></mat-spinner> -->
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="copyrights-label">
+      <mat-label>Copyright@RM111 | All rights reserved.</mat-label>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.sidenav-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 50px;
+}
+
+.drawer-css {
+  min-width: 250px;
+  width: auto;
+  position: fixed;
+  top: 50px;
+  font-weight: 500;
+}

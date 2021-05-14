@@ -1,0 +1,64 @@
+/* .card-background {
+  background-color: #9a69db;
+} */
+.sidenav-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 50px;
+}
+
+.drawer-css {
+  min-width: 100px;
+  width: auto;
+  position: fixed;
+  top: 50px;
+  font-weight: 500;
+}
+
+.no-show-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.margin-bottom {
+  margin-bottom: 30px;
+}
+
+.market-analysis-gameListValue{
+    margin-left: 30px;
+    font-weight: bold;
+    background-color: #ded8e8;
+    padding: 8px;
+
+}
+.market-analysis-gameList{
+  font-weight: bold;
+    border: 4px double;
+    background-color: #dddddd;
+    padding: 10px;
+    font-size: 20px;
+}
+
+mat-expansion-panel {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+@media (min-width: 320px) and (max-width: 1199px) {
+  mat-expansion-panel {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  mat-panel-title {
+    padding-top: 15px
+  }
+  
+  .market-analysis-gameList {
+    padding: 5px;
+  }
+}

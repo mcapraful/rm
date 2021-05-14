@@ -1,0 +1,79 @@
+<mat-toolbar class="app-header-css">
+  <div class="header-left-css">
+    <img *ngIf="window.mediaPort === 'lg'" src="../../../assets/images/header-logo.png" class="cursor-pointer"
+      (click)="onHomeClick()" />
+    <button *ngIf="accountType && accountType==='User'" mat-icon-button (click)="onMenuClick()">
+      <mat-icon class="carrot-menu">menu</mat-icon>
+    </button>
+    <button *ngIf="accountType!=='User' && accountType!=='' && window.mediaPort == 'lg'" class="text-color-red"
+      mat-button (click)="onHomeClick()">List of
+      Clients</button>
+    <button *ngIf="accountType!=='User' && accountType!=='' && window.mediaPort == 'lg'" class="text-color-red"
+      mat-button (click)="onBookShowClick()">Market Analysis</button>
+
+    <button class="text-color-red blinking margin-left-10" mat-flat-button
+      *ngIf="window.mediaPort == 'lg' && accountType!==''"
+      (click)="onResultClick()">{{accountType=='Admin' ?"Submit Result" : "Show Result"}}</button>
+
+    <button *ngIf="accountType!=='User' && accountType!=='' && window.mediaPort == 'lg'" class="text-color-red"
+      mat-button [matMenuTriggerFor]="reports">Reports
+      <i class="fa fa-sort-desc down-arrow" aria-hidden="true"></i>
+    </button>
+    <mat-menu #reports="matMenu" style="padding: 0px !important;">
+      <button mat-menu-item (click)="onAccountStatementClick()" class="submenu">Account Statement</button>
+      <button *ngIf="accountType!=='Admin'" mat-menu-item (click)="onCurrentBetClick()" class="submenu">My Bets</button>
+      <button mat-menu-item (click)="onProfitLossClick()" class="submenu">Profit and Loss</button>
+    </mat-menu>
+    <span *ngIf="accountType && accountType==='User' && window.mediaPort === 'lg'">
+      <button class="text-color-red bussiness-button" mat-button *ngFor="let bussiness of matkaBussinessArray"
+        (click)="navigateToBusiness(bussiness.bussinessName)">
+        {{ bussiness.bussinessName}}
+      </button>
+    </span>
+    <mat-form-field appearance="fill" class="page-list margin-left-10"
+      *ngIf="accountType && accountType!=='User' && window.mediaPort !== 'lg'">
+      <mat-select placeholder="Select Page" (selectionChange)="navigateToAdminActions($event.value)">
+        <mat-option [value]="'submitResult'" class="result-option">
+          <button class="text-color-red blinking" mat-flat-button
+            *ngIf="accountType=='Admin' && window.mediaPort !== 'lg'">Submit Result</button>
+        </mat-option>
+        <mat-option [value]="'home/dashboard'">List of Clients</mat-option>
+        <mat-option [value]="'home/market-analysis'">Market Analysis</mat-option>
+        <mat-option [value]="'home/account-statement'">Account Statement Report</mat-option>
+        <mat-option [value]="'home/profit-loss'">Profit & Loss Report</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="business-list margin-left-10"
+      *ngIf="accountType && accountType==='User' && window.mediaPort !== 'lg'">
+      <mat-select placeholder="Select Event" (selectionChange)="navigateToBusiness($event.value)">
+        <mat-option  [value]="'Home'" (click)="onHomeClick()">Home</mat-option>
+        <mat-option [value]="bussiness.bussinessName" *ngFor="let bussiness of matkaBussinessArray">
+          {{bussiness.bussinessName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="header-right-css">
+    <div *ngIf="accountType=='User' && window.mediaPort === 'lg'" class="marquee margin-right-10">
+      <i>Welcome to rmsattamataka.com</i>
+    </div>
+    <button class="text-color-red" mat-button [matMenuTriggerFor]="username">
+      <i class="fa fa-user-circle margin-right-5" aria-hidden="true"></i>
+      <span> {{loggedInUserInfo?.username }} </span>
+      <i class="fa fa-sort-desc down-arrow" aria-hidden="true"></i>
+    </button>
+    <mat-menu #username="matMenu">
+      <button class="text-color-red blinking" mat-flat-button *ngIf="accountType=='User' && window.mediaPort !== 'lg'"
+        (click)="onResultClick()">Show Result</button>
+      <button mat-menu-item (click)="onChangePasswordClick()" class="submenu">Change password</button>
+      <button mat-menu-item (click)="showCreditBalance()" class="submenu">Account Summary</button>
+      <button mat-menu-item (click)="onAccountStatementClick()" class="submenu" *ngIf="accountType=='User'">Account
+        Statement</button>
+      <button mat-menu-item (click)="onCurrentBetClick()" class="submenu" *ngIf="accountType=='User'">My
+        Bets</button>
+      <button mat-menu-item (click)="onProfitLossClick()" class="submenu" *ngIf="accountType=='User'">Profit and
+        Loss</button>
+      <button mat-menu-item (click)="onLogout()" class="submenu">Log out</button>
+    </mat-menu>
+  </div>
+  <mat-spinner *ngIf="loading$ | async" [diameter]="150" class="mat-spinner-position"></mat-spinner>
+</mat-toolbar>

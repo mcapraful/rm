@@ -1,0 +1,109 @@
+<div>
+    <mat-toolbar class="bet-header-container display-flex-spacebetween">
+        <span>
+            <span class="home-button-wrapper">
+                <button mat-icon-button>
+                    <mat-icon [routerLink]="['/home/user/user-dashboard']" matTooltip="Click here to go home">home
+                    </mat-icon>
+                </button>
+                <span class="d-inline-block">{{matkaBussiness?.name}}</span>
+            </span>
+        </span>
+        <span class="bid-card-header font-size-15px" *ngIf="matkaBussiness">
+            <mat-label class="balance-class">Open Result : {{matkaBussiness?.openTime}}</mat-label>
+            <mat-label class="balance-class margin-top-15px">Close Result: {{matkaBussiness?.closeTime}}</mat-label>
+        </span>
+    </mat-toolbar>
+    <mat-card class="jodi-card">
+        <mat-toolbar class="header-css">
+            <span>Double Patti</span>
+        </mat-toolbar>
+        <div class="margin-top-10">
+            <p class="note-font">Note: Bet amount should be greater than or equal to 5!</p>
+        </div>
+        <mat-card-content class="bid-card-actions margin-top-20">
+            <div class="today-date">
+                <p class="margin-left-15 bid-details">
+                    <span> Place Bid for - <b class="bidding-date"> {{this.bidDate}}</b></span>
+                    <span>Available Balance - <b class="bidding-date">₹
+                            {{this.loggedInUserInfo?.availableBalance}}</b></span>
+                    <span>Exposure - <b class="bidding-date">₹ {{this.loggedInUserInfo?.exposer}}</b></span>
+                </p>
+            </div>
+            <div class="">
+                <mat-radio-group class="content-space-around-align" [(ngModel)]="showType"
+                    aria-label="Select an option">
+                    <mat-radio-button color="primary" value="Open"
+                        [ngClass]="{'cursor-not-allowed': isOpenBidEndTimePassed}" [disabled]="isOpenBidEndTimePassed">
+                        Open
+                        <span class="d-block radio-helper-text">Biding end at {{openBidEndTime}}</span>
+                    </mat-radio-button>
+                    <mat-radio-button color="primary" value="Close"
+                        [ngClass]="{'cursor-not-allowed': isCloseBidEndTimePassed}"
+                        [disabled]="isCloseBidEndTimePassed">
+                        Close
+                        <span class="d-block radio-helper-text">Biding end at {{closeBidEndTime}}</span>
+                    </mat-radio-button>
+                </mat-radio-group>
+                <div class="jodi-chips-container selected-jodi margin-top-20 margin-bottom-20">
+                    <mat-chip-list>
+                        <mat-chip class="cursor-pointer selected-jodi-chip" matChipRemove [removable]="true"
+                            (removed)="remove(selectedJodi)" *ngFor="let selectedJodi of selectedjodiDigitsArray">
+                            <mat-icon matChipRemove class="left-icon">check_circle_outline</mat-icon>
+                            {{selectedJodi.uiValue}}
+                            <mat-icon matChipRemove class="right-icon">cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
+
+            <div class="panna-combo margin-bottom-10" *ngFor="let panna of masterPannaData; let i = index">
+                <div class="content-center-align  border-radius-10">
+                    <button mat-button mat-raised-button (click)="intializePannaDigits(i)"
+                        class="wt-100  bet-header-container">
+                        <span class="padding-left-15">
+                            Select Panna - {{i}}
+                            <mat-icon class="right-chevron-icon">chevron_right</mat-icon>
+                        </span>
+                    </button>
+                </div>
+                <div class="content-center-align" *ngIf="getToggleFlag(i)">
+                    <!-- {{jodiDigitsArray | json}} -->
+                    <div class="jodi-chips-container margin-top-20 margin-bottom-20">
+                        <mat-chip-list class="chiplist-container">
+                            <mat-chip class="cursor-pointer" *ngFor="let jodi of pannaData[i].data"
+                                (click)="selectAndRemoveJodiDigit(jodi, i)">
+                                {{jodi.uiValue}}
+                            </mat-chip>
+                        </mat-chip-list>
+                    </div>
+                </div>
+            </div>
+            <div class="amount-total-wrapper text-center">
+                <span>
+                    <mat-label class="amount-label">Enter Amount</mat-label>
+                    <mat-form-field appearance="outline" class="amount-field margin-left-10">
+                        <span matPrefix class="mat-prefix-symbol">₹&nbsp;</span>
+                        <input matInput type="text" [(ngModel)]="amount">
+                        <mat-hint class="text-red" *ngIf="amount !==0 && amount < 5">Please enter amount greater than or
+                            equal to 5.</mat-hint>
+                    </mat-form-field>
+                </span>
+                <div class="amount-label margin-top-20 margin-left-20"> Total Amount
+                    <span class="margin-left-20">₹</span>
+                    <span
+                        class="margin-left-5">{{amount*selectedjodiDigitsArray.length?amount*selectedjodiDigitsArray.length:'0'}}</span>
+                </div>
+            </div>
+            <div class="margin-top-10">
+                <button type="submit" mat-raised-button color="primary"
+                    [disabled]="(!amount) || selectedjodiDigitsArray?.length === 0" (click)="onPlaceBetClick()">
+                    Place Bet
+                </button>
+                <button class="float-right" type="button" (click)="reset()" title="Click to clear all selections"
+                    mat-raised-button color="primary">Reset</button>
+            </div>
+        </mat-card-content>
+        <mat-spinner *ngIf="loading$ | async" class="mat-spinner-position"></mat-spinner>
+    </mat-card>
+</div>

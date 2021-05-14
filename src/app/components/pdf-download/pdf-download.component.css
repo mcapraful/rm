@@ -1,0 +1,50 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.margin-16 {
+  margin: 16px;
+}
+
+td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  background-color: darkgray;
+}
+.pnt-button {
+  margin: 20px;
+  float: right;
+}
+.pnt-header-css {
+  margin: 10px;
+  font-weight: 600;
+}
+
+.mat-spinner-position {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.pdf-excel-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.margin-rt-20 {
+  margin-right: 20px;
+}
+
+.font-weight-500 {
+  font-weight: 500;
+}

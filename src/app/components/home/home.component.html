@@ -1,0 +1,22 @@
+<div style="display: flex;flex-direction: column;">
+    <app-header (menuClicked)='onMenuClicked()'></app-header>
+    <mat-sidenav-container autosize class="sidenav-container">
+        <mat-sidenav class="drawer-css" #sidenav mode="over">
+            <mat-nav-list *ngIf="businessList">
+                <a mat-list-item *ngFor="let business of businessList"
+                    (click)="navigateToBusiness(business.bussinessName)">
+                    {{business.bussinessName}}
+                </a>
+                <!-- <a mat-list-item>Milan Day</a>
+                <a mat-list-item>Kalyan</a>
+                <a mat-list-item>Milan Night</a>
+                <a mat-list-item>Main Ratan</a>
+                <a mat-list-item>Star Day</a>
+                <a mat-list-item>Star Night</a> -->
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

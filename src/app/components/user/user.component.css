@@ -1,0 +1,19 @@
+::ng-deep.mat-tab-label,
+::ng-deep.mat-tab-label-active {
+  min-width: 50px !important;
+  padding: 3px !important;
+  margin: 3px !important;
+}
+
+.home-tab-css {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-spinner-position {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
