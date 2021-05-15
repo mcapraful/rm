@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountsService } from 'src/app/services/accounts-service';
 import { Observable, of } from 'rxjs';
+import { UtilService } from 'src/app/services/util-service';
 
 @Component({
   selector: 'app-show-results',
@@ -26,6 +27,8 @@ export class ShowResultsComponent implements OnInit {
           if (resultObj.result === 'Loading') {
             this.upcomingResults.push(resultObj);
           }
+          resultObj.openTime = resultObj.openTime ? UtilService.convertTimeToAmPm(resultObj.openTime): null;
+          resultObj.closeTime = resultObj.closeTime ? UtilService.convertTimeToAmPm(resultObj.closeTime): null;
         });
         this.loading$ = of(false);
       } else {

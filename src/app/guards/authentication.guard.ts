@@ -28,7 +28,7 @@ export class AuthenticationGuard implements CanActivate {
     if (sessionStorage.getItem('accountType') === 'User') {
       return true;
     } else {
-      alert('Not authorized');
+      //alert('Not authorized, Please log in first!');
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('username');
       sessionStorage.removeItem('password');

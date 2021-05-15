@@ -5,7 +5,7 @@
         </div>
         <div class="mTop-7px">
             <form [formGroup]="profitLossForm" #formGroupDirective="ngForm">
-                <mat-form-field>
+                <mat-form-field *ngIf="accountType!='User'">
                     <mat-label>Search By Client Name</mat-label>
                     <input type="text" matInput formControlName="clientName" [matAutocomplete]="clientNameAuto">
                     <mat-autocomplete #clientNameAuto="matAutocomplete">

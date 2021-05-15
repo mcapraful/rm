@@ -22,7 +22,7 @@
                         </div>
                         <span
                             class="result-span margin-top-20">{{resultObj.result?resultObj.result:'Result Not Available'}}</span>
-                        <span class="time-span">{{resultObj.openTime}} - {{resultObj.closeTime}}</span>
+                        <span class="time-span">{{resultObj.openTime }} - {{resultObj.closeTime}}</span>
                     </div>
                 </ng-container>
             </mat-card-content>
@@ -37,8 +37,9 @@
                     <div class="bussiness-name">
                         <span>{{resultObj.MatkaBusinessName}}</span>
                     </div>
-                    <span
-                        class="result-span margin-top-20">{{resultObj.result?resultObj.result:'Result Not Available'}}</span>
+                    <span class="result-span margin-top-20">
+                        {{resultObj.result?resultObj.result:'Result Not Available'}}
+                    </span>
                     <span class="time-span">{{resultObj.openTime}} - {{resultObj.closeTime}}</span>
                 </div>
             </mat-card-content>

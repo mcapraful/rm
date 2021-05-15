@@ -22,6 +22,7 @@ export class AccountStatementComponent implements OnInit {
   tableRows = [];
   tableColumns = [];
   totalRecords;
+  accountType; 
   page = new PageModel();
   accountStatementForm: FormGroup;
   options: Observable<string[]>;
@@ -35,6 +36,7 @@ export class AccountStatementComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.accountType = sessionStorage.getItem('accountType');
     this.getClients();
     this.initAccountStatementForm();
     this.getTableColumns();

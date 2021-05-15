@@ -84,15 +84,8 @@ export class MandatoryChangePasswordComponent implements OnInit {
           this.loading$ = of(false);
           this.getUpdateUserDetails();
           this.openSnackBar('User password updated successfully', 'success');
-          if (this.loggedInUserInfo.accountType === 'User') {
-            this.router.navigate(['/home/user/user-dashboard']);
-          } else if (this.loggedInUserInfo.accountType !== 'User') {
-            this.router.navigate(['/home/dashboard']);
-          }
-        } else if (res.error) {
-          this.loading$ = of(false);
-          this.openSnackBar('Error occured while updating password', 'error');
-        }
+          this.router.navigate(['/login']);
+        } 
       },
       (err) => {
         this.loading$ = of(false);

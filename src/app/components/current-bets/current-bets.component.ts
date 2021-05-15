@@ -20,6 +20,7 @@ import { ActionModalComponent } from '../action-modal/action-modal.component';
 export class CurrentBetsComponent implements OnInit {
   tableColumns = [];
   tableRows = [];
+  //transations = [];
   filteredData = [];
   currentBetsForm: FormGroup;
   totalRecords;
@@ -38,8 +39,8 @@ export class CurrentBetsComponent implements OnInit {
   ngOnInit(): void {
     this.initGeneralReportForm();
     this.getTableColumns();
-    this.getCurrentBets();
-    // this.getBids({ fromDate: this.todayDate, toDate: this.todayDate });
+    this.getCurrentBets();    
+    //this.getBids({ fromDate: this.todayDate, toDate: this.todayDate });
   }
 
   initGeneralReportForm() {
@@ -65,6 +66,7 @@ export class CurrentBetsComponent implements OnInit {
       ),
       pageIndex: this.page?.pageNumber ? this.page.pageNumber : 0,
       pageSize: this.page?.size ? this.page.size : 10,
+      //username: sessionStorage.getItem('username')
     };
     this.getBids(params);
   }
@@ -75,9 +77,9 @@ export class CurrentBetsComponent implements OnInit {
       (res: any) => {
         if (res.success) {
           this.tableRows = [];
-          // this.statementForm.resetForm();
+          //this.statementForm.resetForm();
           const transations = res['bettings'];
-          this.totalRecords = res['totalRecordsCount'];
+          this.totalRecords = res['totalRecordsCount'];         
           transations.forEach((transation) => {
             const transactionObj = {
               id: '',
@@ -97,6 +99,7 @@ export class CurrentBetsComponent implements OnInit {
             transactionObj.showType = transation.showType;
             transactionObj.UserName = transation.UserName;
             transactionObj.status = transation.status;
+            //transactionObj.placeDate = this.todayDate;
             transactionObj.placeDate = moment(transation.placeDate).format(
               'MM/DD/YYYY'
             );
@@ -127,7 +130,6 @@ export class CurrentBetsComponent implements OnInit {
       (res: any) => {
         if (res.success) {
           this.tableRows = [];
-          // this.statementForm.resetForm();
           const transations = res['bettings'];
           this.totalRecords = res['totalRecordsCount'];
           transations.forEach((transation) => {
@@ -159,7 +161,6 @@ export class CurrentBetsComponent implements OnInit {
             this.tableRows.push(transactionObj);
           });
           this.filteredData = this.tableRows = [...this.tableRows];
-          // this.filteredData = [...this.tableRows];
           this.loading$ = of(false);
         } else if (res.error) {
           this.openSnackBar('Error occured while fetching My bets', 'error');

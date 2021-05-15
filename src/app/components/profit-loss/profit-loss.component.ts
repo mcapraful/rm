@@ -16,6 +16,7 @@ profitLossTableRows;
   styleUrls: ['./profit-loss.component.css'],
 })
 export class ProfitLossComponent implements OnInit {
+  accountType; 
   clientNames = [];
   profitLossForm: FormGroup;
   options: Observable<string[]>;
@@ -33,6 +34,7 @@ export class ProfitLossComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.accountType = sessionStorage.getItem('accountType');
     this.getClients();
     this.initProfitLossForm();
     this.setTableColumns();

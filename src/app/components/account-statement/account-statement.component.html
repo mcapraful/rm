@@ -5,7 +5,7 @@
         </div>
         <div class="mTop-7px">
             <form [formGroup]="accountStatementForm" #formGroupDirective="ngForm">
-                <mat-form-field>
+                <mat-form-field *ngIf="accountType!='User'">
                     <mat-label>Account Statement Type</mat-label>
                     <mat-select formControlName="accountStatementType" required>
                         <mat-option>Select</mat-option>
@@ -14,7 +14,7 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field class="margin-left-25">
+                <mat-form-field class="margin-left-25" *ngIf="accountType!='User'">
                     <mat-label>Search By Client Name</mat-label>
                     <input type="text" matInput formControlName="clientName" [matAutocomplete]="clientNameAuto">
                     <mat-autocomplete #clientNameAuto="matAutocomplete">

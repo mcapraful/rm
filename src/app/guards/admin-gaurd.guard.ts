@@ -31,9 +31,11 @@ export class AdminGaurdGuard implements CanActivate {
         sessionStorage.getItem('accountType')
       ) > -1
     ) {
+      debugger;
       return true;
     } else {
-      alert('Not authorized');
+      //debugger;
+      //alert('Not authorized, Please log in first!');
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('username');
       sessionStorage.removeItem('password');

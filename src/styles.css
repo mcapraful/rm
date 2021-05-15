@@ -12,7 +12,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .mat-card {
-  background-color: #9a69db !important;
+  /* background-color: #9a69db !important; */
 }
 /* .mat-form-field-appearance-outline .mat-form-field-outline {
   color: black !important;
